@@ -12,9 +12,9 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            @html.ActionLink(Nuts)
-            <a class="dropdown-item" href="#">Dried Fruit</a>
-            <a class="dropdown-item" href="#">Miscellaneous</a>
+            @Html.ActionLink("Nuts", "Nuts", "Products", null, new {@class="dropdown-item" })
+            @Html.ActionLink("Dried Fruit", "driedFruit", "Products", null, new { @class = "dropdown-item" })
+            @Html.ActionLink("Miscellaneous", "Miscellaneous", "Products", null, new { @class = "dropdown-item" })
         </div>
     </div>
 </p>
