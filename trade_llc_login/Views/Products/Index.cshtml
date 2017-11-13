@@ -5,4 +5,16 @@
 
 <h2>Products</h2>
 
-@Html.DropDownList("Products", (IEnumerable<SelectListItem>)ViewBag.listItems, "Select a product", new { @class="form-control"})
+<p>Select a product: 
+    <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Products
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            @html.ActionLink(Nuts)
+            <a class="dropdown-item" href="#">Dried Fruit</a>
+            <a class="dropdown-item" href="#">Miscellaneous</a>
+        </div>
+    </div>
+</p>

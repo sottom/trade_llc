@@ -11,6 +11,7 @@ namespace trade_llc_login.Controllers
         // GET: Products
         public ActionResult Index()
         {
+            /*
             List<SelectListItem> listItems = new List<SelectListItem>();
             listItems.Add(new SelectListItem
             {
@@ -29,6 +30,22 @@ namespace trade_llc_login.Controllers
             });
 
             ViewBag.listItems = listItems;
+            */
+            return View();
+        }
+
+        public ActionResult Nuts()
+        {
+            return View();
+        }
+
+        public ActionResult driedFruit()
+        {
+            return View();
+        }
+
+        public ActionResult Miscellaneous()
+        {
             return View();
         }
     }
