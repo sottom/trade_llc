@@ -273,6 +273,9 @@
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\Products.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\Products\Nuts.cshtml" />
+    <Content Include="Views\Products\driedFruit.cshtml" />
+    <Content Include="Views\Products\Miscellaneous.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
