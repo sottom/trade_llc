@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron text-center header_main row">
+    <div class="col-md-12">
+        <h1>TRADE LLC</h1>
+        <p class="lead">We connect buyers and sellers with world class products</p>
+    </div>
+    <div class="col-md-3 col-md-offset-3">
+        <a href="https://asp.net" class="btn btn-primary btn-lg btn-block block-cta">Buy Items</a>
+    </div>
+    <div class="col-md-3">
+        <a href="https://asp.net" class="btn btn-primary btn-lg btn-block block-cta">Sell Items</a>
+    </div>
+</div>
+</div>
+
+<!-- these two divs look out of place, but they are necessary to make the header full screen -->
+</div>
+<div class="container body-content">
+    <!-- /////////////////////////////////////////////////////////////////////////////////////// -->
+
+    <div class="jumbotron text-center row">
+        <div class="col-md-6">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-6">
+            <img src="~/Content/tradellc_img/soccer.jpg" alt="Alternate Text" />
+        </div>
+    </div>
+
+    <div class="jumbotron text-center row">
+        <div class="col-md-6">
+            <img src="~/Content/tradellc_img/business_man.jpg" alt="Alternate Text" />
+        </div>
+        <div class="col-md-6">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+    </div>
+
+    <div class="jumbotron text-center row">
+        <div class="col-md-6">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-6">
+            <img src="~/Content/tradellc_img/hawaii_coin.jpg" alt="Alternate Text" />
+        </div>
+    </div>
+
+
+    @*
+        IDEA 1 – Trade LLC Site
+
+        Create an MVC website that will allow buyers to ask questions of Bob.
+        On the landing page I want you to implement a bootstrap jumbotron class to create a “call to action” which for now will not have any functionality
+            (If you don’t know what a call to action is, google it!). The landing page
+            (home page), should also display any content that is relevant to Trade LLC
+            (i.e. quotes, videos, etc. – be creative)
+        On the landing page there will be three main links:
+        Products – should take you to the products view
+        The products view will have a dropdown that will consist of
+            (for now) three products
+            (you will choose any 3 products which have been hardcoded into the dropdown).
+        As the user clicks on an entry in the product list, take them to another view
+            (_____ product FAQ’s) which is dynamically loaded using source code.                                        ??????????????????????????
+            For now, the questions and answers on the view for each product will all be the same
+            (HARD CODED - You will create the question and answer), regardless of which product is chosen.
+            You must however pass the following unique information for each product in the viewbag:
+
+
+        product name
+        seller's name
+        sellers address
+        type of product (berry, bean, nut)
+        where the product came from
+        customer satisfaction rating
+        a picture or symbolfor the product
+
+
+        You will need to display all of this information in a section above the FAQ’s on the dynamically loaded view.
+            Please make it look professional. Talk with classmates and talk about the most effective ways to display this information.
+        At the top of the each dynamically created view, you will display a bootstrap breadcrumb
+            (Google it!) that will help the user better navigate your site. Using this breadcrumb menu,
+            the user should be able to go back to the products page to select a different product.
+        At the very bottom of each dynamically created product’s FAQ’s will be a question form.
+            The user will be able to fill out this form to post a new question, just like you would post a comment on Facebook.
+            ** For project 1 we will not be posting the questions or saving them in the database, we just want the form to be there and available.
+        Under each FAQ question, there will also need to be a way for a user to answer that specific question,                        ???????????????????????????????????
+            so you will need to add a reply button in order to have a response form dynamically created when a
+            Buyer wants to answer another buyer’s question. You do not need to save the replies for this project.
+
+
+        About us- should take you to the about view
+        The About view should display “made up” information about the company that wants to help future buyers get
+            questions about their desired products answered by those that have bought the product
+
+
+        Contact – should take you to the contact view
+        The contact view will have basic company information, such as phone number and email.
+            The view will also have a contact form that will have fields for the user’s name, email, subject(choose from a list), and message body.
+        There will need to be a submit button at the bottom of the contact form. This button however,
+            won’t do anything with the data yet. For now it will just clear the text in the form.
+    *@
