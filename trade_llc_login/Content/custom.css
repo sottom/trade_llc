@@ -5,6 +5,9 @@
 .header_main {
     background-image: url("./tradellc_img/driedfruit.jpg");
     background-size: cover;
+    height: 500px;
+    padding-top: 140px;
+    color: white;
 }
 
 div.navbar .breadcrumb {
