@@ -1,9 +1,11 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<br />
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<div class="jumbotron text-center header_main row">
+    <div class="col-md-12">
+        <h8>Contact</h8>
+    </div>
+</div>
 
 <address>
     PO Box #4<br />
@@ -31,7 +33,16 @@
     <input type="email" class="form-control" id="inputEmail" placeholder="Email" maxlength="100">
     <br />
     <label class="control-label" for="inputSubject">Subject</label>
-    <input type="text" class="form-control" id="inputSubject" placeholder="Subject">
+    <select class="form-control" id="inputSubject" name="Subject">
+        <option value="">Subject</option>
+        <option value="bidDried">Dried Fruit Bid</option>
+        <option value="bidNut">Nuts Bid</option>
+        <option value="bidMisc">Miscellaneous Bid</option>
+        <option value="offerDried">Dried Fruit Offer</option>
+        <option value="offerNut">Nuts Offer</option>
+        <option value="offerMisc">Miscellaneous Offer</option>
+        <option value="other">Other</option>
+    </select>
     <br />
     <label class="control-label" for="inputMessage">Message</label>
     <textarea type="text" class="form-control" id="inputMessage" placeholder="Message" maxlength="1000" rows="10" width="100%"></textarea>
