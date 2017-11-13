@@ -3,18 +3,18 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Products</h2>
+<h2>Index</h2>
 
 <p>Select a product: 
     <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="btn btn-primary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Products
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            @Html.ActionLink("Nuts", "Nuts", "Products", null, new {@class="dropdown-item" })
-            @Html.ActionLink("Dried Fruit", "driedFruit", "Products", null, new { @class = "dropdown-item" })
-            @Html.ActionLink("Miscellaneous", "Miscellaneous", "Products", null, new { @class = "dropdown-item" })
+            <li>@Html.ActionLink("Nuts", "Nuts", "Products", null, new {@class="dropdown-item" })</li>
+            <li>@Html.ActionLink("Dried Fruit", "driedFruit", "Products", null, new { @class = "dropdown-item" })</li>
+            <li>@Html.ActionLink("Miscellaneous", "Miscellaneous", "Products", null, new { @class = "dropdown-item" })</li>
         </div>
     </div>
 </p>

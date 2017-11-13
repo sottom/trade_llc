@@ -3,10 +3,10 @@
 }
 
 .header_main {
-    background-image: url("./tradellc_img/driedfruit.jpg");
+    background-image: url("./tradellc_img/cover.jpg");
+    height: 400px;
+    padding: 120px;
     background-size: cover;
-    height: 500px;
-    padding-top: 140px;
     color: white;
 }
 
@@ -26,4 +26,17 @@ h8{
     font-size: 100pt;
 }
 
+.blackBack {
+    background-color: black;
+    background-size: cover;
+    border-radius: 10px;
+    opacity: .7;
+    padding: 10px;
+    font-family: 'Times New Roman', Times, serif;
+}
 
+    .blackBack > div, .blackBack > div > button {
+        opacity: 1;
+        font-family: 'Monotype Corsiva';
+    }
+ 

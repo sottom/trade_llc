@@ -60,3 +60,4 @@ $("#inputMessage").on("keyup", function ()
     var iCount = $("#inputMessage").val().length
     $("#characterCount").text("Characters Remaining: " + ($("#inputMessage").attr("maxlength") - iCount))
 })
+
