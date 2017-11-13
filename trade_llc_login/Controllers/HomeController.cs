@@ -16,7 +16,7 @@ namespace trade_llc_login.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "";
 
             return View();
         }
