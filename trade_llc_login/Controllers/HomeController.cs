@@ -27,5 +27,12 @@ namespace trade_llc_login.Controllers
 
             return View();
         }
+
+        public ActionResult Products()
+        {
+            ViewBag.Message = "Your products page.";
+
+            return View();
+        }
     }
 }
