@@ -18,3 +18,12 @@ div.navbar .breadcrumb {
     margin: 0px;
     padding: 0 0 3px 0;
 }
+
+.jumbotron {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    color: inherit;
+    background-color: #eee;
+    background-image: url('tradellc_img/driedfruit.jpg');
+}
