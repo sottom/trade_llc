@@ -209,6 +209,8 @@
     <Content Include="Content\tradellc_img\DriedFruit-landing.jpg" />
     <Content Include="Content\tradellc_img\driedfruit.jpg" />
     <Content Include="Content\tradellc_img\header.jpg" />
+    <Content Include="Content\tradellc_img\LoveCustomer-landing.jpg" />
+    <Content Include="Content\tradellc_img\Mission-landing.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
