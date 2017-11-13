@@ -45,3 +45,18 @@ function setBreadcrumbs(location) {
         $('#main-breadcrumb').html(crumb_html);
     }
 }
+//To clear the Contact form (temporary fix for Project #1)
+function clearContact()
+{
+    $("#inputName").text("")
+    $("#inputPhone").text("")
+    $("#inputEmail").text("")
+    $("#inputSubject").value = ""
+    $("#inputMessage").text("")
+}
+
+$("#inputMessage").on("keyup", function ()
+{
+    var iCount = $("#inputMessage").val().length
+    $("#characterCount").text("Characters Remaining: " + ($("#inputMessage").attr("maxlength") - iCount))
+})

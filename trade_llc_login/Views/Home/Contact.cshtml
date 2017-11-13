@@ -18,20 +18,24 @@
 
 @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
 {
-    <label class="control-label" for="inputName">Full Name</label>
-    <input type="text" class="form-control" id="inputName" placeholder="Full Name">
+    <label class="control-label" for="inputFirst">First Name</label>
+    <input type="text" class="form-control" id="inputFirst" placeholder="First Name" maxlength="50">
+    <br />
+    <label class="control-label" for="inputLast">Last Name</label>
+    <input type="text" class="form-control" id="inputLast" placeholder="Last Name" maxlength="50">
     <br />
     <label class="control-label" for="inputPhone">Phone Number</label>
-    <input type="number" class="form-control" id="inputEmail" placeholder="Phone Number">
+    <input type="text" class="form-control" id="inputPhone" placeholder="Phone Number" maxlength="10">
     <br />
     <label class="control-label" for="inputEmail">Email address</label>
-    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+    <input type="email" class="form-control" id="inputEmail" placeholder="Email" maxlength="100">
     <br />
     <label class="control-label" for="inputSubject">Subject</label>
     <input type="text" class="form-control" id="inputSubject" placeholder="Subject">
     <br />
     <label class="control-label" for="inputMessage">Message</label>
-    <input type="text" class="form-control" id="inputMessage" placeholder="Message">
+    <input type="text" class="form-control" id="inputMessage" placeholder="Message" maxlength="1000">
+        <p id="characterCount"></p>
     <br />
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-default" onclick="clearContact()">Submit</button>
 }
