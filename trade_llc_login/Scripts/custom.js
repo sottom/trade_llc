@@ -61,3 +61,11 @@ $("#inputMessage").on("keyup", function ()
     $("#characterCount").text("Characters Remaining: " + ($("#inputMessage").attr("maxlength") - iCount))
 })
 
+
+function SubmitStatus()
+{
+    var sStatus = $("#comment").val()
+    $("#textAreaComment").html(sStatus)
+}
+
+

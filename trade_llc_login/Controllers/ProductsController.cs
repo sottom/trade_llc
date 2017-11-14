@@ -66,5 +66,7 @@ namespace trade_llc_login.Controllers
             ViewBag.ProductPrice = "*Please contact Trade LLC for price.";
             return View();
         }
+
+
     }
 }
