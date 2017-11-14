@@ -25,6 +25,7 @@
 
 @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
 {
+    //This is the form for the contact page - maxLength's are included
     <div class="row">
         <div class="col-md-4">
             <label class="control-label" for="inputFirst">First Name</label>
@@ -48,6 +49,7 @@
             <label class="control-label" for="inputEmail">Email address</label>
             <input type="email" class="form-control" id="inputEmail" placeholder="Email" maxlength="100">
         </div>
+        @*this is the dropdown subject list*@
         <div class="col-md-4">
             <label class="control-label" for="inputSubject">Subject</label>
             <select class="form-control" id="inputSubject" name="Subject">
@@ -68,6 +70,7 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
+            @*This is calling the function to keep track of character count for the Message Text box*@
             <label class="control-label" for="inputMessage">Message</label>
             <textarea style="max-width: 90% !important" type="text" class="form-control" id="inputMessage" placeholder="Message" maxlength="1000" rows="10" width="100%"></textarea>
             <p id="characterCount"></p>

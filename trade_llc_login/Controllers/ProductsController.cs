@@ -34,7 +34,7 @@ namespace trade_llc_login.Controllers
             return View();
         }
 
-        public ActionResult Nuts()
+        public ActionResult Nuts() //nuts view
         {
             ViewBag.ProductName = "Cashews";
             ViewBag.ProductCategory = "Nuts";
@@ -45,7 +45,7 @@ namespace trade_llc_login.Controllers
             return View();
         }
 
-        public ActionResult driedFruit()
+        public ActionResult driedFruit() //driedFruit view
         {
             ViewBag.ProductName = "Bananas";
             ViewBag.ProductCategory = "Dried Fruit";
@@ -56,7 +56,7 @@ namespace trade_llc_login.Controllers
             return View();
         }
 
-        public ActionResult Miscellaneous()
+        public ActionResult Miscellaneous() //Miscellaneous view
         {
             ViewBag.ProductName = "Corn";
             ViewBag.ProductCategory = "Miscellaneous";
