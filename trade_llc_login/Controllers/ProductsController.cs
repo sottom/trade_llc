@@ -41,6 +41,7 @@ namespace trade_llc_login.Controllers
             ViewBag.ProductLocation = "Salt Lake City, UT";
             ViewBag.ProductImage = "../Content/tradellc_img/cashews.jpg";
             ViewBag.ProductAmount = "250lb";
+            ViewBag.ProductPrice = "*Please contact Trade LLC for price.";
             return View();
         }
 
@@ -51,6 +52,7 @@ namespace trade_llc_login.Controllers
             ViewBag.ProductLocation = "Quincy, IL";
             ViewBag.ProductImage = "../Content/tradellc_img/bananas.jpg";
             ViewBag.ProductAmount = "75lb";
+            ViewBag.ProductPrice = "$1.25/lb";
             return View();
         }
 
@@ -61,6 +63,7 @@ namespace trade_llc_login.Controllers
             ViewBag.ProductLocation = "Des Moines, IA";
             ViewBag.ProductImage = "../Content/tradellc_img/corn.png";
             ViewBag.ProductAmount = "500lb";
+            ViewBag.ProductPrice = "*Please contact Trade LLC for price.";
             return View();
         }
     }

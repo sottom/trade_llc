@@ -9,3 +9,19 @@
     </div>
 </div>
 
+<div class="jumbotron">
+    <h1 style="text-align: center;">@ViewBag.ProductName</h1>
+    <img style="display:block;margin:0 auto;" src= @ViewBag.ProductImage />
+    <br />
+    <p style="text-align: center">
+        <li>Location: @ViewBag.ProductLocation</li>
+        <li>Amount of Product for Sell: @ViewBag.ProductAmount</li>
+        <li>Price: @ViewBag.ProductPrice</li>
+    </p>
+</div>
+
+    <h1>Comment/Questions</h1>
+    <textarea type="text" class="form-control" id="inputMessage" placeholder="Message" maxlength="1000" rows="10" width="100%"></textarea>
+    <p id="characterCount"></p>
+    <br />
+    <button type="submit" class="btn btn-default" onclick="clearContact()">Submit</button>
