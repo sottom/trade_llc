@@ -40,3 +40,6 @@ h8{
         font-family: 'Monotype Corsiva';
     }
  
+    textarea {
+        max-width: 50% !important;
+    }
