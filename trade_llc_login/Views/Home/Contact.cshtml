@@ -25,33 +25,56 @@
 
 @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
 {
-    <label class="control-label" for="inputFirst">First Name</label>
-    <input type="text" class="form-control" id="inputFirst" placeholder="First Name" maxlength="50">
+    <div class="row">
+        <div class="col-md-4">
+            <label class="control-label" for="inputFirst">First Name</label>
+            <input type="text" class="form-control" id="inputFirst" placeholder="First Name" maxlength="50">
+        </div>
+        <div class="col-md-4">
+            <label class="control-label" for="inputLast">Last Name</label>
+            <input type="text" class="form-control" id="inputLast" placeholder="Last Name" maxlength="50">
+        </div>
+        <div class="col-md-4">
+            <label class="control-label" for="inputPhone">Phone Number</label>
+            <input type="text" class="form-control" id="inputPhone" placeholder="Phone Number" maxlength="10">
+        </div>
+    </div>
+    
     <br />
-    <label class="control-label" for="inputLast">Last Name</label>
-    <input type="text" class="form-control" id="inputLast" placeholder="Last Name" maxlength="50">
     <br />
-    <label class="control-label" for="inputPhone">Phone Number</label>
-    <input type="text" class="form-control" id="inputPhone" placeholder="Phone Number" maxlength="10">
+    
+    <div class="row">
+        <div class="col-md-offset-2 col-md-4">
+            <label class="control-label" for="inputEmail">Email address</label>
+            <input type="email" class="form-control" id="inputEmail" placeholder="Email" maxlength="100">
+        </div>
+        <div class="col-md-4">
+            <label class="control-label" for="inputSubject">Subject</label>
+            <select class="form-control" id="inputSubject" name="Subject">
+                <option value="">Subject</option>
+                <option value="bidDried">Dried Fruit Bid</option>
+                <option value="bidNut">Nuts Bid</option>
+                <option value="bidMisc">Miscellaneous Bid</option>
+                <option value="offerDried">Dried Fruit Offer</option>
+                <option value="offerNut">Nuts Offer</option>
+                <option value="offerMisc">Miscellaneous Offer</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+    </div>
+    
     <br />
-    <label class="control-label" for="inputEmail">Email address</label>
-    <input type="email" class="form-control" id="inputEmail" placeholder="Email" maxlength="100">
     <br />
-    <label class="control-label" for="inputSubject">Subject</label>
-    <select class="form-control" id="inputSubject" name="Subject">
-        <option value="">Subject</option>
-        <option value="bidDried">Dried Fruit Bid</option>
-        <option value="bidNut">Nuts Bid</option>
-        <option value="bidMisc">Miscellaneous Bid</option>
-        <option value="offerDried">Dried Fruit Offer</option>
-        <option value="offerNut">Nuts Offer</option>
-        <option value="offerMisc">Miscellaneous Offer</option>
-        <option value="other">Other</option>
-    </select>
-    <br />
-    <label class="control-label" for="inputMessage">Message</label>
-    <textarea type="text" class="form-control" id="inputMessage" placeholder="Message" maxlength="1000" rows="10" width="100%"></textarea>
-        <p id="characterCount"></p>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <label class="control-label" for="inputMessage">Message</label>
+            <textarea style="max-width: 90% !important" type="text" class="form-control" id="inputMessage" placeholder="Message" maxlength="1000" rows="10" width="100%"></textarea>
+            <p id="characterCount"></p>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    
     <br />
     <button type="submit" class="btn btn-default" onclick="clearContact()">Submit</button>
 }
