@@ -42,3 +42,6 @@ h8{
     textarea {
         max-width: 50% !important;
     }
+    .jumbotron > div {
+        color: black;
+    }
