@@ -3,35 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using trade_llc_login.DAL;
+using trade_llc_login.Models;
 
 namespace trade_llc_login.Controllers
 {
     public class ProductsController : Controller
     {
+        private TradeContext db = new TradeContext();
+
         // GET: Products
         public ActionResult Index()
         {
-            /*
-            List<SelectListItem> listItems = new List<SelectListItem>();
-            listItems.Add(new SelectListItem
-            {
-                Text = "Beans",
-                Value = "Beans"
-            });
-            listItems.Add(new SelectListItem
-            {
-                Text = "Nuts",
-                Value = "Nuts"
-            });
-            listItems.Add(new SelectListItem
-            {
-                Text = "Dried Fruits",
-                Value = "Dried Fruits"
-            });
+            IEnumerable<ProductTypes> types = db.Database.SqlQuery<ProductTypes>(
+                "SELECT * " + 
+                "FROM ProductTypes"
+                );
 
-            ViewBag.listItems = listItems;
-            */
-            return View();
+            return View(types);
         }
 
         public ActionResult Nuts() //nuts view

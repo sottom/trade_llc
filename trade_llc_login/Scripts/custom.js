@@ -60,16 +60,16 @@ var count = 1;
 function SubmitStatus() {
 
     var sStatus = $("#comment").val();
-$("#comment").val("");
+    $("#comment").val("");
     $("#allComments").append("<div style='padding: 10px; background-color:grey; border: solid black 1px;' id='realComment" + count + "'>" + sStatus + '</div>'
-        + '<a id= "hideReply' + count + '" onclick= "replyComment('+count+')" > Reply</a>'
-        + '<br><span id="replyLabel'+count+'" style="display:none;"><b>Reply: </b></span><textarea style= "display:none" class="form-control" rows= "1" cols= "500" id= "replyComment' + count + '" ></textarea >'
-        + '<br><a style= "display:none; width: 200px" id= "submitReply' + count + '" class="btn btn-primary btn-large" onclick= "SubmitReply('+count+')" > Submit Reply</a > ');
+        + '<a id= "hideReply' + count + '" onclick= "replyComment(' + count + ')" > Reply</a>'
+        + '<br><span id="replyLabel' + count + '" style="display:none;"><b>Reply: </b></span><textarea style= "display:none" class="form-control" rows= "1" cols= "500" id= "replyComment' + count + '" ></textarea >'
+        + '<br><a style= "display:none; width: 200px" id= "submitReply' + count + '" class="btn btn-primary btn-large" onclick= "SubmitReply(' + count + ')" > Submit Reply</a > ');
     count++;
 }
 
 function replyComment(num) {
-    
+
     $('#replyLabel' + num).css('display', "block");
     $('#replyComment' + num).css('display', "block");
     $('#submitReply' + num).css('display', "block");
@@ -81,7 +81,7 @@ function SubmitReply(num) {
     $('#replyComment' + num).css('display', "none");
     $('#submitReply' + num).css('display', "none");
     var sStatus = $("#replyComment" + num).val();
-    $("#realComment" + num).append("<div style='padding-left: 30px;'><b>Reply: </b>" + sStatus + "</div>" );
+    $("#realComment" + num).append("<div style='padding-left: 30px;'><b>Reply: </b>" + sStatus + "</div>");
 }
 
 

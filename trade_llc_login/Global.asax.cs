@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using trade_llc_login.DAL;
 
 namespace trade_llc_login
 {
@@ -12,6 +14,8 @@ namespace trade_llc_login
     {
         protected void Application_Start()
         {
+            Database.SetInitializer<TradeContext>(null);
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
