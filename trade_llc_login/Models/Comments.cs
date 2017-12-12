@@ -23,8 +23,8 @@ namespace trade_llc_login.Models
         public int ProductID { get; set; }
         public virtual Products Products { get; set; }
 
-        //[ForeignKey("AspNetUsers")]
+        [ForeignKey("Users")]
         public int UserID { get; set; }
-        //public virtual AspNetUsers ApsNetUsers  { get; set; }
+        public virtual Users Users  { get; set; }
     }
 }

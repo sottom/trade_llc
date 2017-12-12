@@ -34,7 +34,5 @@ namespace trade_llc_login.Models
         [StringLength(255)]
         public string UserPassword { get; set; }
 
-        public string hello;
-
     }
 }
