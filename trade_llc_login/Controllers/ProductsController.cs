@@ -25,35 +25,43 @@ namespace trade_llc_login.Controllers
 
         public ActionResult Nuts() //nuts view
         {
+            var products = db.products.Where(i => i.ProductName == "Cashews");
+
             ViewBag.ProductName = "Cashews";
             ViewBag.ProductCategory = "Nuts";
             ViewBag.ProductLocation = "Salt Lake City, UT";
             ViewBag.ProductImage = "../Content/tradellc_img/cashews.jpg";
             ViewBag.ProductAmount = "250lb";
             ViewBag.ProductPrice = "*Please contact Trade LLC for price.";
-            return View();
+
+            return View(products);
         }
 
         public ActionResult driedFruit() //driedFruit view
         {
+            var products = db.products.Where(i => i.ProductName == "Bananas");
+
             ViewBag.ProductName = "Bananas";
             ViewBag.ProductCategory = "Dried Fruit";
             ViewBag.ProductLocation = "Quincy, IL";
             ViewBag.ProductImage = "../Content/tradellc_img/bananas.jpg";
             ViewBag.ProductAmount = "75lb";
             ViewBag.ProductPrice = "$1.25/lb";
-            return View();
+
+            return View(products);
         }
 
         public ActionResult Miscellaneous() //Miscellaneous view
         {
+            var products = db.products.Where(i => i.ProductName == "Corn");
+
             ViewBag.ProductName = "Corn";
             ViewBag.ProductCategory = "Miscellaneous";
             ViewBag.ProductLocation = "Des Moines, IA";
             ViewBag.ProductImage = "../Content/tradellc_img/corn.png";
             ViewBag.ProductAmount = "500lb";
             ViewBag.ProductPrice = "*Please contact Trade LLC for price.";
-            return View();
+            return View(products);
         }
 
 
