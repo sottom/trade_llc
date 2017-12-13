@@ -353,12 +353,18 @@ namespace trade_llc_login.Controllers
                         var firstname = givenNameClaim.Value;
                         var lastname = lastNameClaim.Value;
 
-                        // Add User Email to the database
                         // Add check to see if already in database
-                        db.Database.ExecuteSqlCommand(
-                            $"INSERT INTO Users(UserFirstName, UserLastName, UserEmail, UserPassword) VALUES ('{firstname}', '{lastname}', '{email}', NULL)"
-                            );
-                        db.SaveChanges();
+                        // this will only work if they don't change their google information
+                        var NameFromDB = db.users.Where(record => record.UserFirstName == firstname).Select(record => record.UserFirstName).ToString();
+                        if(NameFromDB == firstname)
+                        {
+                            db.Database.ExecuteSqlCommand(
+                                $"INSERT INTO Users(UserFirstName, UserLastName, UserEmail, UserPassword) VALUES ('{firstname}', '{lastname}', '{email}', NULL)"
+                                );
+                            db.SaveChanges();
+                        }
+
+                        // Add User Email to the database
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
