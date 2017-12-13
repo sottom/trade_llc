@@ -13,20 +13,21 @@
 </div>
 <div class="container body-content">
     <!-- /////////////////////////////////////////////////////////////////////////////////////// -->
-
+    @foreach (var product in Model)
+    {
     <div class="jumbotron row">
         <div class="col-md-6">
-                    <h1>@ViewBag.ProductName</h1>
+                    <h1>@product.ProductName</h1>
                     <ul>
-                        <li>Location: @ViewBag.ProductLocation</li>
-                        <li>Amount of Product for Sell: @ViewBag.ProductAmount</li>
-                        <li>Price: @ViewBag.ProductPrice</li>
+                        <li>Location: @product.ProductPickupLocation</li>
+                        <li>Amount of Product for Sell: @product.ProductAmount</li>
+                        <li>Price: @product.SellingPrice</li>
                     </ul>
         </div>
-        <img class="col-md-6" style="display:block;margin:0 auto;" src=@ViewBag.ProductImage />
+        <img class="col-md-6" style="display:block;margin:0 auto;" src=@product.ProductImg />
         <br />
     </div>
-
+    }
 <div>
     <h1>Comment/Questions</h1>
     <div class="form-group">
