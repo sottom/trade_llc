@@ -29,13 +29,5 @@ namespace trade_llc_login.Models
         {
             return new ApplicationDbContext();
         }
-
-        public DbSet<ProductTypes> productTypes { get; set; }
-        public DbSet<Products> products { get; set; }
-        public DbSet<Types> types { get; set; }
-        public DbSet<Types_Users> types_users { get; set; }
-        public DbSet<Comments> comments { get; set; }
-        public DbSet<CommentReplies> commentReplies { get; set; }
-        public DbSet<ApplicationUser> applicationUser { get; set; }
     }
 }

@@ -9,12 +9,15 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using trade_llc_login.Models;
+using trade_llc_login.DAL;
 
 namespace trade_llc_login.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        TradeContext db = new TradeContext();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -333,6 +336,30 @@ namespace trade_llc_login.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+
+
+                    if (loginInfo.Login.LoginProvider == "Google")
+                    {
+                        var externalIdentity = AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
+
+                        var emailClaim = externalIdentity.Result.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email);
+
+                        var lastNameClaim = externalIdentity.Result.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Surname);
+
+                        var givenNameClaim = externalIdentity.Result.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
+
+
+                        var email = emailClaim.Value;
+                        var firstname = givenNameClaim.Value;
+                        var lastname = lastNameClaim.Value;
+
+                        // Add User Email to the database
+                        // Add check to see if already in database
+                        db.Database.ExecuteSqlCommand(
+                            $"INSERT INTO Users(UserFirstName, UserLastName, UserEmail, UserPassword) VALUES ('{firstname}', '{lastname}', '{email}', NULL)"
+                            );
+                        db.SaveChanges();
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");

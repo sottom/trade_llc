@@ -33,7 +33,7 @@ namespace trade_llc_login.Models
         public decimal SellingPrice { get; set; }
 
         [DisplayName("Price After Commission")]
-        public decimal PriceAfterCommission { get; set; }
+        public decimal? PriceAfterCommission { get; set; }
 
         [DisplayName("Commission")]
         [StringLength(255)]
@@ -44,15 +44,16 @@ namespace trade_llc_login.Models
         public string ProductImg { get; set; }
 
         [ForeignKey("ProductTypes")]
-        public int ProductTypeID { get; set; }
+        public int? ProductTypeID { get; set; }
         public virtual ProductTypes ProductTypes { get; set; }
 
-        //[ForeignKey("AspNetUsers")]
+        [ForeignKey("Seller")]
         public int SellerID { get; set; }
-        //public virtual AspNetUsers AspNetUser { get; set; }
 
-        //[ForeignKey("AspNetUsers")]
+        [ForeignKey("Buyer")]
         public int? BuyerID { get; set; }
-        //public virtual AspNetUsers AspNetUsers { get; set; }
+
+        public virtual Users Seller { get; set; }
+        public virtual Users Buyer { get; set; }
     }
 }
