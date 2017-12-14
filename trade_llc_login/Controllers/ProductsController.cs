@@ -99,7 +99,7 @@ namespace trade_llc_login.Controllers
         public ActionResult Comment(FormCollection form, int productId, string email, string productType)
         {
 
-            string comment = form["comment"];
+            string comment = form["comment"].Replace("'", "").Replace("\"", "");
             var userId = db.users.Where(i => i.UserEmail == email).FirstOrDefault().UserID;
             db.Database.ExecuteSqlCommand(
                 $"INSERT INTO Comments (Comment, ProductID, UserID) " +
@@ -122,7 +122,7 @@ namespace trade_llc_login.Controllers
         public ActionResult Reply(FormCollection form, int CommentID, string email, string productType)
 
         {
-            string reply = form["reply"];
+            string reply = form["reply"].Replace("'", "").Replace("\"", "");;
             
             
             if(email == null)
@@ -145,7 +145,7 @@ namespace trade_llc_login.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditReply(FormCollection form, int ReplyID, string productType)
         {
-            string reply = form["editReply"];
+            string reply = form["editReply"].Replace("'", "").Replace("\"", "");;
 
             db.Database.ExecuteSqlCommand("UPDATE CommentReplies SET Reply = '" + reply + "' WHERE ReplyID = " + ReplyID);
 
@@ -158,7 +158,7 @@ namespace trade_llc_login.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditComment(FormCollection form, int CommentID, string productType)
         {
-            string comments = form["editComment"];
+            string comments = form["editComment"].Replace("'", "").Replace("\"", "");
             db.Database.ExecuteSqlCommand(
                 $"UPDATE Comments " +
                 $"SET Comment = '{comments}' " +
