@@ -122,5 +122,21 @@ namespace trade_llc_login.Controllers
 
             return RedirectToAction(productType);
         }
+
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditReply(FormCollection form, int CommentID, string email, string productType)
+        {
+        }
+
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditComment(FormCollection form, int CommentID, string email, string productType)
+        {
+        }
     }
 }
