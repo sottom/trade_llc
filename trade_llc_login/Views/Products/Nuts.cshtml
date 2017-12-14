@@ -87,18 +87,6 @@
                 }
             </div>
 
-<<<<<<< HEAD
-            @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = prodId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-            {
-                @Html.AntiForgeryToken()
-                @Html.Label("Comment:")
-                @Html.TextArea("comment")
-                <br />
-                <input type="submit" class="btn btn-primary" value="Submit" />
-            }
-        </div>
-    </div>
-=======
         @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = Model.ProductID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
@@ -109,4 +97,3 @@
         }
    </div>
 </div>
->>>>>>> 43ec54f59f6c8ad6dccebac4dcea05bb2bb29aad
