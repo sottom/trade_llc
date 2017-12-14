@@ -62,10 +62,14 @@
                         using (Html.BeginForm("EditComment", "Products", new { commentId = comment.CommentID, productType = "Nuts" }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "hidden", @id = ("editComment_" + commCounter) }))
                         {
                             @Html.AntiForgeryToken()
+                            @Html.Label("Edit Comment:");
+                            <br />
                             @Html.TextArea("editComment", new { @cols = "60", @rows = "3" })
                             <br />
                             <br />
                             <input type="submit" class="btn btn-primary" value="Submit" />
+                            <br />
+                            <br />
                         }
 
                         commCounter++;
@@ -78,10 +82,14 @@
                                 @using (Html.BeginForm("EditReply", "Products", new { ReplyID = rep.ReplyID, productType = "Nuts" }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "hidden", @id = ("editReply_" + repCounter) }))
                                 {
                                     @Html.AntiForgeryToken()
+                                    @Html.Label("Edit Reply:");
+                                    <br />
                                     @Html.TextArea("editReply", new { @cols = "40", @rows = "3" })
                                     <br />
                                     <br />
                                     <input type="submit" class="btn btn-primary" value="Submit" />
+                                    <br />
+                                    <br />
                                 }
                             </div>
                             
@@ -90,7 +98,7 @@
 
                         @*reply box*@
                         <div class="reply">
-                            @using (Html.BeginForm("Reply", "Products", new { email = ViewBag.Cookie, CommentID = comment.CommentID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("Reply", "Products", new { CommentID = comment.CommentID, email = ViewBag.Cookie, productType = "Nuts" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                             @Html.AntiForgeryToken()
                             @Html.Label("Reply:")
@@ -107,7 +115,7 @@
 
                     <br />
                     @*comment box*@
-                    @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = Model.ProductID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Comment", "Products", new { productId = Model.ProductID, email = ViewBag.Cookie, productType = "Nuts" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.Label("Comment:")
