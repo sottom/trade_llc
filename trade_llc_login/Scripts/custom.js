@@ -87,4 +87,24 @@ function SubmitReply(num) {
     $("#realComment" + num).append("<div style='padding-left: 30px;'><b>Reply: </b>" + sStatus + "</div>");
 }
 
+function editComment(id) {
+    var search = '#commentBox_' + id;
+    var value = $(search).text();
+
+    // put the text you want to edit in the edit box
+    $('#editCommentButton_' + id).addClass('hidden');
+    $('#editComment_' + id + ' textarea').val(value);
+    $('#editComment_' + id).removeClass('hidden');
+}
+
+function editReply(id) {
+    var search = '#replyBox_' + id;
+    var value = $(search).text();
+
+    // put the text you want to edit in the edit box
+    $('#editReplyButton_' + id).addClass('hidden');
+    $('#editReply_' + id + ' textarea').val(value);
+    $('#editReply_' + id).removeClass('hidden');
+}
+
 

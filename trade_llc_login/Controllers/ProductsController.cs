@@ -95,8 +95,9 @@ namespace trade_llc_login.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Comment(FormCollection form, int productId, string email)
+        public ActionResult Comment(FormCollection form, int productId, string email, string productType)
         {
+            
             string comment = form["comment"];
             var userId = db.users.Where(i => i.UserEmail == email).FirstOrDefault().UserID;
             db.Database.ExecuteSqlCommand(
@@ -104,15 +105,17 @@ namespace trade_llc_login.Controllers
                 $"VALUES ('{comment}', '{productId}', '{userId}')"
                 );
 
-            return RedirectToAction("Nuts");
+            return RedirectToAction(productType);
         }
 
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+
         [Authorize]
-        public ActionResult Reply(FormCollection form, int CommentID, string email)
+        public ActionResult Reply(FormCollection form, int CommentID, string email, string productType)
+
         {
             string reply = form["reply"];
             var userId = db.users.Where(i => i.UserEmail == email).FirstOrDefault().UserID;
@@ -121,7 +124,37 @@ namespace trade_llc_login.Controllers
                 $"VALUES ('{reply}', '{CommentID}', '{userId}')"
                 );
 
-            return RedirectToAction("Nuts");
+            return RedirectToAction(productType);
+        }
+
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditReply(FormCollection form, int ReplyID, string productType)
+        {
+            string reply = form["editReply"];
+
+            db.Database.ExecuteSqlCommand("UPDATE CommentReplies SET Reply = '" + reply + "' WHERE ReplyID = " + ReplyID);
+
+            return RedirectToAction(productType);
+        }
+        
+
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditComment(FormCollection form, int CommentID, string productType)
+        {
+            string comments = form["editComment"];
+            db.Database.ExecuteSqlCommand(
+                $"UPDATE Comments " +
+                $"SET Comment = '{comments}' " +
+                $"WHERE CommentID = {CommentID}"
+                );
+
+            return RedirectToAction(productType);
         }
     }
 }
