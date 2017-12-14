@@ -119,6 +119,10 @@ namespace trade_llc_login.Controllers
         // POST: /Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
+<<<<<<< HEAD
+        [Authorize]
+=======
+>>>>>>> a4286941bf94701488d69623fccca6c36e9a7a90
         public ActionResult Reply(FormCollection form, int CommentID, string email, string productType)
 
         {
@@ -143,6 +147,7 @@ namespace trade_llc_login.Controllers
         // POST: /Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult EditReply(FormCollection form, int ReplyID, string productType)
         {
             string reply = form["editReply"].Replace("'", "").Replace("\"", "");;
@@ -156,6 +161,7 @@ namespace trade_llc_login.Controllers
         // POST: /Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult EditComment(FormCollection form, int CommentID, string productType)
         {
             string comments = form["editComment"].Replace("'", "").Replace("\"", "");
