@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using trade_llc_login.DAL;
 using trade_llc_login.Models;
 
@@ -17,7 +19,7 @@ namespace trade_llc_login.Controllers
         public ActionResult Index()
         {
             IEnumerable<ProductTypes> types = db.Database.SqlQuery<ProductTypes>(
-                "SELECT * " + 
+                "SELECT * " +
                 "FROM ProductTypes"
                 );
 
@@ -30,7 +32,7 @@ namespace trade_llc_login.Controllers
 
             product.Comments = db.comments.Where(i => i.ProductID == 1).ToList(); //adding all comments to the Comments IEnumerable
 
-            foreach(var com in product.Comments)
+            foreach (var com in product.Comments)
             {
                 com.reps = db.commentReplies.Where(i => i.CommentID == com.CommentID).ToList();
 
@@ -52,11 +54,11 @@ namespace trade_llc_login.Controllers
 
             product.Comments = db.comments.Where(i => i.ProductID == 2).ToList();
 
-            foreach(var com in product.Comments)
+            foreach (var com in product.Comments)
             {
                 com.reps = db.commentReplies.Where(i => i.CommentID == com.CommentID).ToList();
 
-                foreach(var rep in com.reps)
+                foreach (var rep in com.reps)
                 {
                     rep.Users = db.users.Where(i => i.UserID == rep.UserID).FirstOrDefault();
                 }
@@ -92,12 +94,10 @@ namespace trade_llc_login.Controllers
         //
         // POST: /Account/Login
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public ActionResult Comment(FormCollection form, int productId, string email, string productType)
         {
-            
+
             string comment = form["comment"];
             var userId = db.users.Where(i => i.UserEmail == email).FirstOrDefault().UserID;
             db.Database.ExecuteSqlCommand(
@@ -108,17 +108,29 @@ namespace trade_llc_login.Controllers
             return RedirectToAction(productType);
         }
 
+        [HttpGet]
+        public ActionResult Reply(string productType)
+        {
+
+            return RedirectToAction(productType);
+        }
+
         // POST: /Account/Login
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-
-        [Authorize]
         public ActionResult Reply(FormCollection form, int CommentID, string email, string productType)
 
         {
             string reply = form["reply"];
+            
+            
+            if(email == null)
+            {
+                return RedirectToAction(productType);
+            }
+
             var userId = db.users.Where(i => i.UserEmail == email).FirstOrDefault().UserID;
+
             db.Database.ExecuteSqlCommand(
                 $"INSERT INTO CommentReplies (Reply, CommentID, UserID) " +
                 $"VALUES ('{reply}', '{CommentID}', '{userId}')"
@@ -129,7 +141,6 @@ namespace trade_llc_login.Controllers
 
         // POST: /Account/Login
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult EditReply(FormCollection form, int ReplyID, string productType)
         {
@@ -143,7 +154,6 @@ namespace trade_llc_login.Controllers
 
         // POST: /Account/Login
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult EditComment(FormCollection form, int CommentID, string productType)
         {
