@@ -90,6 +90,7 @@ function SubmitReply(num) {
 function editComment(id) {
     var search = '#commentBox_' + id;
     var value = $(search).text();
+    console.log(value);
 
     // put the text you want to edit in the edit box
     $('#editCommentButton_' + id).addClass('hidden');
@@ -100,6 +101,7 @@ function editComment(id) {
 function editReply(id) {
     var search = '#replyBox_' + id;
     var value = $(search).text();
+    console.log(value);
 
     // put the text you want to edit in the edit box
     $('#editReplyButton_' + id).addClass('hidden');
