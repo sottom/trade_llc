@@ -16,6 +16,7 @@ namespace trade_llc_login.Controllers
         private TradeContext db = new TradeContext();
 
         // GET: Products
+        [Authorize]
         public ActionResult Index()
         {
             IEnumerable<ProductTypes> types = db.Database.SqlQuery<ProductTypes>(
