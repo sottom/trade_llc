@@ -48,19 +48,45 @@ namespace trade_llc_login.Controllers
 
         public ActionResult driedFruit() //driedFruit view
         {
-            var products = db.products.Where(i => i.ProductName == "Bananas");
+            Products product = db.products.Where(i => i.ProductID == 2).FirstOrDefault();
 
+            product.Comments = db.comments.Where(i => i.ProductID == 2).ToList();
+
+            foreach(var com in product.Comments)
+            {
+                com.reps = db.commentReplies.Where(i => i.CommentID == com.CommentID).ToList();
+
+                foreach(var rep in com.reps)
+                {
+                    rep.Users = db.users.Where(i => i.UserID == rep.UserID).FirstOrDefault();
+                }
+
+                com.Users = db.users.Where(i => i.UserID == com.UserID).FirstOrDefault();
+            }
             ViewBag.Cookie = global.cookieEmail;
 
-            return View(products);
+            return View(product);
         }
 
         public ActionResult Miscellaneous() //Miscellaneous view
         {
-            var products = db.products.Where(i => i.ProductName == "Corn");
+            Products product = db.products.Where(i => i.ProductID == 3).FirstOrDefault();
 
+            product.Comments = db.comments.Where(i => i.ProductID == 3).ToList();
+
+            foreach (var com in product.Comments)
+            {
+                com.reps = db.commentReplies.Where(i => i.CommentID == com.CommentID).ToList();
+
+                foreach (var rep in com.reps)
+                {
+                    rep.Users = db.users.Where(i => i.UserID == rep.UserID).FirstOrDefault();
+                }
+
+                com.Users = db.users.Where(i => i.UserID == com.UserID).FirstOrDefault();
+            }
             ViewBag.Cookie = global.cookieEmail;
-            return View(products);
+            return View(product);
         }
 
         //
