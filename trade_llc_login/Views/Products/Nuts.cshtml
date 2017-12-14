@@ -11,7 +11,8 @@
 
     .comment {
         background-color: lightgray;
-        border: solid gray 2px
+        border: solid gray 2px;
+        padding: 20px;
     }
 
     .reply {
@@ -92,16 +93,17 @@
                         <input type="submit" class="btn btn-primary" value="Submit" />
                         }
                     }
-                </div>
 
                 @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = Model.ProductID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.Label("Comment:")
-                    @Html.TextArea("comment")
+                    <br />
+                    @Html.TextArea("comment", new { @cols="100", @rows="5" })
                     <br />
                     <input type="submit" class="btn btn-primary" value="Submit" />
                 }
+                </div>
             </div>
         </div>
     </div>
