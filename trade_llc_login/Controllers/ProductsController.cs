@@ -112,7 +112,6 @@ namespace trade_llc_login.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-
         [Authorize]
         public ActionResult Reply(FormCollection form, int CommentID, string email, string productType)
 
@@ -131,6 +130,7 @@ namespace trade_llc_login.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult EditReply(FormCollection form, int ReplyID, string productType)
         {
             string reply = form["editReply"];
@@ -145,6 +145,7 @@ namespace trade_llc_login.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult EditComment(FormCollection form, int CommentID, string productType)
         {
             string comments = form["editComment"];
