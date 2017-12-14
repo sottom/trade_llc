@@ -65,7 +65,7 @@
                 foreach (var rep in comment.reps)
                 {
                     <h5><strong>@rep.Users.UserFirstName @rep.Users.UserLastName:</strong> <span id="replyBox_@repCounter">@rep.Reply</span></h5>
-                    using (Html.BeginForm("EditReply", "Products", new { email = ViewBag.Cookie, CommentID = comment.CommentID }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "hidden", @id = ("editReply_" + repCounter) }))
+                    using (Html.BeginForm("EditReply", "Products", new {ReplyID = rep.ReplyID, productType = "Nuts" }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "hidden", @id = ("editReply_" + repCounter) }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.TextArea("editReply")

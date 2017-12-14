@@ -127,10 +127,18 @@ namespace trade_llc_login.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult EditReply(FormCollection form, int CommentID, string email, string productType)
+        public ActionResult EditReply(FormCollection form, int ReplyID, string productType)
         {
+<<<<<<< HEAD
+            string reply = form["editReply"];
+
+            db.Database.ExecuteSqlCommand("UPDATE CommentReplies SET Reply = '" + reply + "' WHERE ReplyID = " + ReplyID);
+
+=======
+>>>>>>> 7d28fe1482d9ba2861cc14c1e3674b04a2a9ff88
             return RedirectToAction(productType);
         }
+        
 
         // POST: /Account/Login
         [HttpPost]
@@ -138,6 +146,8 @@ namespace trade_llc_login.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditComment(FormCollection form, int CommentID, string productType)
         {
+<<<<<<< HEAD
+=======
             string comments = form["editComment"];
             db.Database.ExecuteSqlCommand(
                 $"UPDATE Comments " +
@@ -145,6 +155,7 @@ namespace trade_llc_login.Controllers
                 $"WHERE CommentID = {CommentID}"
                 );
 
+>>>>>>> 7d28fe1482d9ba2861cc14c1e3674b04a2a9ff88
             return RedirectToAction(productType);
         }
     }
