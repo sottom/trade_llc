@@ -43,7 +43,7 @@
             }
 
             @*reply box*@
-            using (Html.BeginForm("Reply", "Products", new { email = ViewBag.Cookie, CommentID = comment.CommentID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            using (Html.BeginForm("Reply", "Products", new { email = ViewBag.Cookie, CommentID = comment.CommentID, productType = "Miscellaneous" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.Label("Reply:")
@@ -52,7 +52,7 @@
                 }
             }
         </div>
-        @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = Model.ProductID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = Model.ProductID, productType = "Miscellaneous" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.Label("Comment:")
