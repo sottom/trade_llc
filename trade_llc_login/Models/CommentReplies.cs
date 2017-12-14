@@ -22,5 +22,9 @@ namespace trade_llc_login.Models
         [ForeignKey("Comments")]
         public int CommentID { get; set; }
         public virtual Comments Comments { get; set; }
+
+        [ForeignKey("Users")]
+        public int UserID { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

@@ -13,6 +13,11 @@ using trade_llc_login.DAL;
 
 namespace trade_llc_login.Controllers
 {
+    public static class global
+    {
+        public static string cookieEmail;
+    }
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -82,6 +87,7 @@ namespace trade_llc_login.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    global.cookieEmail = model.Email;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -150,16 +156,25 @@ namespace trade_llc_login.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(Users model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = model.UserEmail, Email = model.UserEmail };
+                var result = await UserManager.CreateAsync(user, model.UserPassword);
                 if (result.Succeeded)
                 {
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
+                    // Add User info to the database
+                    db.Database.ExecuteSqlCommand(
+                        $"INSERT INTO Users(UserFirstName, UserLastName, UserEmail, UserPassword) " +
+                        $"VALUES ('{model.UserFirstName}', '{model.UserLastName}', '{model.UserEmail}', '{model.UserPassword}')"
+                        );
+                    db.SaveChanges();
+
+                    global.cookieEmail = model.UserEmail;
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -349,22 +364,31 @@ namespace trade_llc_login.Controllers
                         var givenNameClaim = externalIdentity.Result.Claims.FirstOrDefault(c => c.Type == ClaimTypes.GivenName);
 
 
-                        var email = emailClaim.Value;
-                        var firstname = givenNameClaim.Value;
-                        var lastname = lastNameClaim.Value;
+                        string email = emailClaim.Value;
+                        string firstname = givenNameClaim.Value;
+                        string lastname = lastNameClaim.Value;
 
                         // Add check to see if already in database
-                        // this will only work if they don't change their google information
-                        var NameFromDB = db.users.Where(record => record.UserFirstName == firstname).Select(record => record.UserFirstName).ToString();
-                        if(NameFromDB == firstname)
+                        string userEmail = "";
+                        try
                         {
+                            userEmail = db.users.Where(r => r.UserEmail == email).FirstOrDefault().UserEmail;
+                        }
+                        catch
+                        {
+                            userEmail = null;
+                        }
+
+                        if (userEmail == null)
+                        {
+                            // Add User info to the database
                             db.Database.ExecuteSqlCommand(
-                                $"INSERT INTO Users(UserFirstName, UserLastName, UserEmail, UserPassword) VALUES ('{firstname}', '{lastname}', '{email}', NULL)"
+                                $"INSERT INTO Users(UserFirstName, UserLastName, UserEmail, UserPassword) " +
+                                $"VALUES ('{firstname}', '{lastname}', '{email}', NULL)"
                                 );
                             db.SaveChanges();
                         }
-
-                        // Add User Email to the database
+                        global.cookieEmail = email;
                     }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -425,6 +449,7 @@ namespace trade_llc_login.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            global.cookieEmail = "";
             return RedirectToAction("Index", "Home");
         }
 

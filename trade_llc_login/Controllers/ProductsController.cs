@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using trade_llc_login.DAL;
@@ -25,14 +26,21 @@ namespace trade_llc_login.Controllers
 
         public ActionResult Nuts() //nuts view
         {
-            var products = db.products.Where(i => i.ProductName == "Cashews");
+            var comments = db.comments.Where(i => i.ProductID == 1).ToList();
+            IEnumerable<Comments> products;
+            foreach(var com in comments)
+            {
+                com.reps = db.commentReplies.Where(i => i.CommentID == com.CommentID).ToList();
+                foreach (var rep in com.reps)
+                {
+                    rep.Users = db.users.Where(i => i.UserID == rep.UserID).FirstOrDefault();
+                }
+                com.Products = db.products.Where(i => i.ProductID == 1).FirstOrDefault(); //cashews
+                com.Users = db.users.Where(i => i.UserID == com.UserID).FirstOrDefault();
+            }
+            products = comments;
 
-            ViewBag.ProductName = "Cashews";
-            ViewBag.ProductCategory = "Nuts";
-            ViewBag.ProductLocation = "Salt Lake City, UT";
-            ViewBag.ProductImage = "../Content/tradellc_img/cashews.jpg";
-            ViewBag.ProductAmount = "250lb";
-            ViewBag.ProductPrice = "*Please contact Trade LLC for price.";
+            ViewBag.Cookie = global.cookieEmail;
 
             return View(products);
         }
@@ -41,12 +49,7 @@ namespace trade_llc_login.Controllers
         {
             var products = db.products.Where(i => i.ProductName == "Bananas");
 
-            ViewBag.ProductName = "Bananas";
-            ViewBag.ProductCategory = "Dried Fruit";
-            ViewBag.ProductLocation = "Quincy, IL";
-            ViewBag.ProductImage = "../Content/tradellc_img/bananas.jpg";
-            ViewBag.ProductAmount = "75lb";
-            ViewBag.ProductPrice = "$1.25/lb";
+            ViewBag.Cookie = global.cookieEmail;
 
             return View(products);
         }
@@ -55,15 +58,26 @@ namespace trade_llc_login.Controllers
         {
             var products = db.products.Where(i => i.ProductName == "Corn");
 
-            ViewBag.ProductName = "Corn";
-            ViewBag.ProductCategory = "Miscellaneous";
-            ViewBag.ProductLocation = "Des Moines, IA";
-            ViewBag.ProductImage = "../Content/tradellc_img/corn.png";
-            ViewBag.ProductAmount = "500lb";
-            ViewBag.ProductPrice = "*Please contact Trade LLC for price.";
+            ViewBag.Cookie = global.cookieEmail;
             return View(products);
         }
 
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Comment(FormCollection form, int productId, string email)
+        {
+            string comment = form["comment"];
+            var userId = db.users.Where(i => i.UserEmail == email).FirstOrDefault().UserID;
+            db.Database.ExecuteSqlCommand(
+                $"INSERT INTO Comments (Comment, ProductID, UserID) " +
+                $"VALUES ('{comment}', '{productId}', '{userId}')"
+                );
+
+            return RedirectToAction("Nuts");
+        }
 
     }
 }

@@ -18,6 +18,7 @@ namespace trade_llc_login.Models
         [DisplayName("Comment")]
         [StringLength(255)]
         public string Comment { get; set; }
+        public IEnumerable<CommentReplies> reps { get; set; }
 
         [ForeignKey("Products")]
         public int ProductID { get; set; }

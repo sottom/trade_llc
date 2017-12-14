@@ -34,5 +34,9 @@ namespace trade_llc_login.Models
         [StringLength(255)]
         public string UserPassword { get; set; }
 
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("UserPassword", ErrorMessage = "The password and confirmation password do not match.")]
+        public string UserConfirmPassword { get; set; }
     }
 }

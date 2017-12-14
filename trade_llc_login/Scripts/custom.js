@@ -57,15 +57,18 @@ $("#inputMessage").on("keyup", function () {
 
 var count = 1;
 
-function SubmitStatus() {
+function SubmitStatus(email, productId) {
 
     var sStatus = $("#comment").val();
+    window.location = "/Products/Comment/" + productId + "/" + sStatus + "/" + email + "/";
+    /*
     $("#comment").val("");
     $("#allComments").append("<div style='padding: 10px; background-color:grey; border: solid black 1px;' id='realComment" + count + "'>" + sStatus + '</div>'
         + '<a id= "hideReply' + count + '" onclick= "replyComment(' + count + ')" > Reply</a>'
         + '<br><span id="replyLabel' + count + '" style="display:none;"><b>Reply: </b></span><textarea style= "display:none" class="form-control" rows= "1" cols= "500" id= "replyComment' + count + '" ></textarea >'
         + '<br><a style= "display:none; width: 200px" id= "submitReply' + count + '" class="btn btn-primary btn-large" onclick= "SubmitReply(' + count + ')" > Submit Reply</a > ');
     count++;
+    */
 }
 
 function replyComment(num) {
