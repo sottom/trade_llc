@@ -1,4 +1,4 @@
-﻿@model IEnumerable<trade_llc_login.Models.Comments>
+﻿@model trade_llc_login.Models.Products
 @{
     ViewBag.Title = "Nuts";
     var prodId = 0;
@@ -15,22 +15,19 @@
 <div class="container body-content">
     <!-- /////////////////////////////////////////////////////////////////////////////////////// -->
 
-    @foreach (var comment in Model)
-    {
     <div class="jumbotron row">
         <div class="col-md-6">
-                    <h1>@comment.Products.ProductName</h1>
+                    <h1>@Model.ProductName</h1>
                     <ul>
-                        <li>Location: @comment.Products.ProductPickupLocation</li>
-                        <li>Amount of Product for Sell: @comment.Products.ProductAmount</li>
-                        <li>Price: @comment.Products.SellingPrice</li>
+                        <li>Location: @Model.ProductPickupLocation</li>
+                        <li>Amount of Product for Sell: @Model.ProductAmount</li>
+                        <li>Price: @Model.SellingPrice</li>
                     </ul>
         </div>
-        <img class="col-md-6" style="display:block;margin:0 auto;" src=@comment.Products.ProductImg />
+        <img class="col-md-6" style="display:block;margin:0 auto;" src=@Model.ProductImg />
         <br />
     </div>
-        prodId = comment.Products.ProductID;
-    }
+        prodId = product.ProductID;
 
     @*TODO - switch how the models are being grabbed in ProductsController (it's printing multiple cashews because it is based off of comments, not products)*@
            @*- add ability to reply
@@ -38,30 +35,30 @@
 <div>
     <h1>Comment/Questions</h1>
     <div class="form-group">
-        @foreach (var comment in Model)
-        {
+
             <div id="allComments">
 
-                @*user comment*@
-                <h3><strong>@comment.Users.UserFirstName @comment.Users.UserLastName:</strong> @comment.Comment</h3>
-
-                @*user replies*@
-                @foreach (var rep in comment.reps)
+                @foreach (var comment in Model.Comments) //second loop to go through the comments.
                 {
-                    <h5><strong>@rep.Users.UserFirstName @rep.Users.UserLastName:</strong> @rep.Reply</h5>
+                        @*user comment*@
+                        <h3><strong>@comment.Users.UserFirstName @comment.Users.UserLastName:</strong> @comment.Comment</h3>
+
+                        @*user replies*@
+                        foreach (var rep in comment.reps)
+                        {
+                            <h5><strong>@rep.Users.UserFirstName @rep.Users.UserLastName:</strong> @rep.Reply</h5>
+                        }
+
+                        @*reply box*@
+                        using (Html.BeginForm("Reply", "Products", new { email = ViewBag.Cookie, CommentID = comment.CommentID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Label("Reply:")
+                            @Html.TextBox("reply")
+                            <input type="submit" class="btn btn-primary" value="Submit" />
+                        }
                 }
-
-                @*reply box*@
-        @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = prodId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.Label("Reply:")
-            @Html.TextBox("reply")
-            <input type="submit" class="btn btn-primary" value="Submit" />
-        }
-
             </div>
-        }
 
         @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = prodId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {

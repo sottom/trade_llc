@@ -55,5 +55,7 @@ namespace trade_llc_login.Models
 
         public virtual Users Seller { get; set; }
         public virtual Users Buyer { get; set; }
+
+        public IEnumerable<Comments> Comments { get; set; }
     }
 }

@@ -26,23 +26,24 @@ namespace trade_llc_login.Controllers
 
         public ActionResult Nuts() //nuts view
         {
-            var comments = db.comments.Where(i => i.ProductID == 1).ToList();
-            IEnumerable<Comments> products;
-            foreach(var com in comments)
+            Products product = db.products.Where(i => i.ProductID == 1).FirstOrDefault();
+
+            product.Comments = db.comments.Where(i => i.ProductID == 1).ToList(); //adding all comments to the Comments IEnumerable
+
+            foreach(var com in product.Comments)
             {
                 com.reps = db.commentReplies.Where(i => i.CommentID == com.CommentID).ToList();
+
                 foreach (var rep in com.reps)
                 {
                     rep.Users = db.users.Where(i => i.UserID == rep.UserID).FirstOrDefault();
                 }
-                com.Products = db.products.Where(i => i.ProductID == 1).FirstOrDefault(); //cashews
+
                 com.Users = db.users.Where(i => i.UserID == com.UserID).FirstOrDefault();
             }
-            products = comments;
-
             ViewBag.Cookie = global.cookieEmail;
 
-            return View(products);
+            return View(product);
         }
 
         public ActionResult driedFruit() //driedFruit view
@@ -79,5 +80,20 @@ namespace trade_llc_login.Controllers
             return RedirectToAction("Nuts");
         }
 
+        // POST: /Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Reply(FormCollection form, int CommentID, string email)
+        {
+            string reply = form["reply"];
+            var userId = db.users.Where(i => i.UserEmail == email).FirstOrDefault().UserID;
+            db.Database.ExecuteSqlCommand(
+                $"INSERT INTO CommentReplies (Reply, CommentID, UserID) " +
+                $"VALUES ('{reply}', '{CommentID}', '{userId}')"
+                );
+
+            return RedirectToAction("Nuts");
+        }
     }
 }
