@@ -94,6 +94,7 @@ namespace trade_llc_login.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Comment(FormCollection form, int productId, string email)
         {
             string comment = form["comment"];
@@ -110,6 +111,7 @@ namespace trade_llc_login.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Reply(FormCollection form, int CommentID, string email)
         {
             string reply = form["reply"];
