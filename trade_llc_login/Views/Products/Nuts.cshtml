@@ -47,7 +47,7 @@
                 {
                     @*user comment*@
                     <h3 id="comment_@commCounter"><strong>@comment.Users.UserFirstName @comment.Users.UserLastName:</strong> <span id="commentBox_@commCounter">@comment.Comment</span></h3>
-                    using (Html.BeginForm("EditComment", "Products", new { email = ViewBag.Cookie, CommentID = comment.CommentID }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "hidden", @id = ("editComment_" + commCounter) }))
+                    using (Html.BeginForm("EditComment", "Products", new { commentId = comment.CommentID, productType = "Nuts"}, FormMethod.Post, new { enctype = "multipart/form-data", @class = "hidden", @id = ("editComment_" + commCounter) }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.TextArea("editComment")
@@ -73,7 +73,7 @@
                 }
 
                 @*reply box*@
-                using (Html.BeginForm("Reply", "Products", new { email = ViewBag.Cookie, CommentID = comment.CommentID , productType = "Nuts"}, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                using (Html.BeginForm("Reply", "Products", new { email = ViewBag.Cookie, CommentID = comment.CommentID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.Label("Reply:")
@@ -83,7 +83,7 @@
                 }
             </div>
 
-        @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = Model.ProductID, productType = "Nuts" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = Model.ProductID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.Label("Comment:")

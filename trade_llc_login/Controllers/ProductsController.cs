@@ -129,14 +129,23 @@ namespace trade_llc_login.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditReply(FormCollection form, int CommentID, string email, string productType)
         {
+            return RedirectToAction(productType);
         }
 
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult EditComment(FormCollection form, int CommentID, string email, string productType)
+        public ActionResult EditComment(FormCollection form, int CommentID, string productType)
         {
+            string comments = form["editComment"];
+            db.Database.ExecuteSqlCommand(
+                $"UPDATE Comments " +
+                $"SET Comment = '{comments}' " +
+                $"WHERE CommentID = {CommentID}"
+                );
+
+            return RedirectToAction(productType);
         }
     }
 }
