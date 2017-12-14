@@ -4,6 +4,7 @@
     int commCounter = 1;
     int repCounter = 1;
 }
+<!--Page specific styles-->
 <style>
     .hidden {
         display: none;
@@ -54,7 +55,7 @@
             <div id="allComments">
 
                 <div class="comment">
-                    @foreach (var comment in Model.Comments) //second loop to go through the comments.
+                    @foreach (var comment in Model.Comments) //loop to go through the comments.
                     {
                         @*edit comments*@
                         <h3 id="comment_@commCounter"><strong>@comment.Users.UserFirstName @comment.Users.UserLastName:</strong> <span id="commentBox_@commCounter">@comment.Comment</span> <label id="editCommentButton_@commCounter" class="pointer"><a onclick="editComment(@commCounter)"> . . . Edit</a></label></h3>
