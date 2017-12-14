@@ -18,6 +18,9 @@
     .reply {
         margin-left: 40px;
     }
+    .pointer {
+        cursor: pointer;
+    }
 </style>
 
 <div class="jumbotron text-center header_main row">
@@ -44,9 +47,6 @@
         <br />
     </div>
 
-    @*TODO - switch how the models are being grabbed in ProductsController (it's printing multiple cashews because it is based off of comments, not products)*@
-    @*- add ability to reply
-        - add ability to edit comments or replies*@
     <div>
         <h1>Comment/Questions</h1>
         <div class="form-group">
@@ -56,53 +56,75 @@
                 <div class="comment">
                     @foreach (var comment in Model.Comments) //second loop to go through the comments.
                     {
-                        @*user comment*@
-                        <h3 id="comment_@commCounter"><strong>@comment.Users.UserFirstName @comment.Users.UserLastName:</strong> <span id="commentBox_@commCounter">@comment.Comment</span></h3>
+                        @*edit comments*@
+                        <h3 id="comment_@commCounter"><strong>@comment.Users.UserFirstName @comment.Users.UserLastName:</strong> <span id="commentBox_@commCounter">@comment.Comment</span> <label id="editCommentButton_@commCounter" class="pointer"><a onclick="editComment(@commCounter)"> . . . Edit</a></label></h3>
+                        
                         using (Html.BeginForm("EditComment", "Products", new { commentId = comment.CommentID, productType = "Nuts" }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "hidden", @id = ("editComment_" + commCounter) }))
                         {
                             @Html.AntiForgeryToken()
-                            @Html.TextArea("editComment")
+                            @Html.Label("Edit Comment:");
+                            <br />
+                            @Html.TextArea("editComment", new { @cols = "60", @rows = "3" })
+                            <br />
+                            <br />
                             <input type="submit" class="btn btn-primary" value="Submit" />
+                            <br />
+                            <br />
                         }
-                        <label id="editCommentButton_@commCounter"><a onclick="editComment(@commCounter)">Edit</a></label>
+
                         commCounter++;
 
-                        @*user replies*@
-                    foreach (var rep in comment.reps)
-                    {
-                        <div class="reply">
-                            <h5><strong>@rep.Users.UserFirstName @rep.Users.UserLastName:</strong> <span id="replyBox_@repCounter">@rep.Reply</span></h5>
-                            @using (Html.BeginForm("EditReply", "Products", new { ReplyID = rep.ReplyID, productType = "Nuts" }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "hidden", @id = ("editReply_" + repCounter) }))
-                            {
-                                @Html.AntiForgeryToken()
-                                @Html.TextArea("editReply")
-                                <input type="submit" class="btn btn-primary" value="Submit" />
-                            }
-                            <label id="editReplyButton_@repCounter"><a onclick="editReply(@repCounter)">Edit</a></label>
-                        </div>
-
+                        @* edit replies*@
+                        foreach (var rep in comment.reps)
+                        {
+                            <div class="reply">
+                                <h5><strong>@rep.Users.UserFirstName @rep.Users.UserLastName:</strong> <span id="replyBox_@repCounter">@rep.Reply</span> <label id="editReplyButton_@repCounter" class="pointer"><a onclick="editReply(@repCounter)"> . . . Edit</a></label></h5>
+                                @using (Html.BeginForm("EditReply", "Products", new { ReplyID = rep.ReplyID, productType = "Nuts" }, FormMethod.Post, new { enctype = "multipart/form-data", @class = "hidden", @id = ("editReply_" + repCounter) }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.Label("Edit Reply:");
+                                    <br />
+                                    @Html.TextArea("editReply", new { @cols = "40", @rows = "3" })
+                                    <br />
+                                    <br />
+                                    <input type="submit" class="btn btn-primary" value="Submit" />
+                                    <br />
+                                    <br />
+                                }
+                            </div>
+                            
                         repCounter++;
                     }
 
-                    @*reply box*@
-                    using (Html.BeginForm("Reply", "Products", new { email = ViewBag.Cookie, CommentID = comment.CommentID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        @Html.Label("Reply:")
-                        @Html.TextBox("reply")
-                        <input type="submit" class="btn btn-primary" value="Submit" />
-                        }
+                        @*reply box*@
+                        <div class="reply">
+                            @using (Html.BeginForm("Reply", "Products", new { CommentID = comment.CommentID, email = ViewBag.Cookie, productType = "Nuts" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                            @Html.AntiForgeryToken()
+                            @Html.Label("Reply:")
+                            <br />
+                            @Html.TextArea("reply", new { @cols = "40", @rows = "3" })
+                                <br />
+                                <br />
+                            <input type="submit" class="btn btn-primary" value="Submit" />
+                            }
+                        </div>
+                            <hr style="border-top: black 1px solid;" />
+
                     }
 
-                @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = Model.ProductID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Label("Comment:")
                     <br />
-                    @Html.TextArea("comment", new { @cols="100", @rows="5" })
-                    <br />
-                    <input type="submit" class="btn btn-primary" value="Submit" />
-                }
+                    @*comment box*@
+                    @using (Html.BeginForm("Comment", "Products", new { productId = Model.ProductID, email = ViewBag.Cookie, productType = "Nuts" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Label("Comment:")
+                        <br />
+                        @Html.TextArea("comment", new { @cols = "60", @rows = "5" })
+                        <br />
+                        <br />
+                        <input type="submit" class="btn btn-primary" value="Submit" />
+                    }
                 </div>
             </div>
         </div>
