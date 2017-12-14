@@ -94,6 +94,7 @@ namespace trade_llc_login.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Comment(FormCollection form, int productId, string email, string productType)
         {
             
@@ -111,7 +112,10 @@ namespace trade_llc_login.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+
+        [Authorize]
         public ActionResult Reply(FormCollection form, int CommentID, string email, string productType)
+
         {
             string reply = form["reply"];
             var userId = db.users.Where(i => i.UserEmail == email).FirstOrDefault().UserID;
