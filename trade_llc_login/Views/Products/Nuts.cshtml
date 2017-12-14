@@ -1,7 +1,6 @@
 ﻿@model trade_llc_login.Models.Products
 @{
     ViewBag.Title = "Nuts";
-    var prodId = 0;
 }
 
 <div class="jumbotron text-center header_main row">
@@ -59,7 +58,7 @@
                 }
             </div>
 
-        @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = prodId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = Model.ProductID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             @Html.Label("Comment:")

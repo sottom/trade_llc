@@ -31,12 +31,37 @@
 <div>
     <h1>Comment/Questions</h1>
     <div class="form-group">
-        <div id="allComments"></div>
-        <label for="comment">Comment:</label>
-        <textarea class="form-control" rows="5" cols="500" id="comment"></textarea>
-    </div>
-    <p id="characterCount"></p>
-    <br />
-    <a class="btn btn-primary btn-large" onclick="SubmitStatus()">Submit</a>
+        <div id="allComments">
+            @foreach (var comment in Model.Comments) //second loop to go through the comments.
+            {
+                @*user comment*@
+                <h3><strong>@comment.Users.UserFirstName @comment.Users.UserLastName:</strong> @comment.Comment</h3>
+
+                        @*user replies*@
+            foreach (var rep in comment.reps)
+            {
+                <h5><strong>@rep.Users.UserFirstName @rep.Users.UserLastName:</strong> @rep.Reply</h5>
+            }
+
+            @*reply box*@
+            using (Html.BeginForm("Reply", "Products", new { email = ViewBag.Cookie, CommentID = comment.CommentID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Label("Reply:")
+                @Html.TextBox("reply")
+                <input type="submit" class="btn btn-primary" value="Submit" />
+                }
+            }
+        </div>
+
+        @using (Html.BeginForm("Comment", "Products", new { email = ViewBag.Cookie, productId = Model.ProductID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Label("Comment:")
+            @Html.TextArea("comment")
+            <br />
+            <input type="submit" class="btn btn-primary" value="Submit" />
+        }
+        </div>
     
 </div>
