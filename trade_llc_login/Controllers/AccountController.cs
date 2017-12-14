@@ -352,7 +352,6 @@ namespace trade_llc_login.Controllers
             {
                 case SignInStatus.Success:
 
-
                     if (loginInfo.Login.LoginProvider == "Google")
                     {
                         var externalIdentity = AuthenticationManager.GetExternalIdentityAsync(DefaultAuthenticationTypes.ExternalCookie);
@@ -390,6 +389,7 @@ namespace trade_llc_login.Controllers
                         }
                         global.cookieEmail = email;
                     }
+
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
