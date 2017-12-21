@@ -119,10 +119,7 @@ namespace trade_llc_login.Controllers
         // POST: /Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-<<<<<<< HEAD
         [Authorize]
-=======
->>>>>>> a4286941bf94701488d69623fccca6c36e9a7a90
         public ActionResult Reply(FormCollection form, int CommentID, string email, string productType)
 
         {
